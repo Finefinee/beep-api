@@ -1,0 +1,10 @@
+package com.b.beep.domain.user.repository
+
+import com.b.beep.domain.user.entity.StudentInfoEntity
+import com.b.beep.domain.user.entity.UserEntity
+import org.springframework.data.jpa.repository.JpaRepository
+
+interface StudentInfoRepository : JpaRepository<StudentInfoEntity, Long> {
+    fun findByUser(user: UserEntity): StudentInfoEntity?
+    fun findByGradeAndClsAndNum(grade: Int, cls: Int, num: Int): StudentInfoEntity?
+}

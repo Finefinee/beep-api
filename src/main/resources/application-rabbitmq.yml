@@ -1,0 +1,11 @@
+spring:
+  rabbitmq:
+    host: ${RABBITMQ_HOST}
+    port: 5672
+    username: ${RABBITMQ_USERNAME}
+    password: ${RABBITMQ_PW}
+
+rabbitmq:
+  notification:
+    queue: "notification.queue"
+    exchange: "notification.exchange"
