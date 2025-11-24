@@ -1,4 +1,4 @@
-FROM eclipse-temurin:17-jdk
-ARG JAR_FILE=./build/libs/*-SNAPSHOT.jar
-COPY ${JAR_FILE} app.jar
+FROM openjdk:17
+COPY build/libs/*SNAPSHOT.jar app.jar
+ENV TZ=Asia/Seoul
 ENTRYPOINT ["java", "-jar", "/app.jar"]
