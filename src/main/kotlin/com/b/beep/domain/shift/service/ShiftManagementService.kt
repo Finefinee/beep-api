@@ -32,14 +32,12 @@ class ShiftManagementService(
 
         shift.status = status
 
-        if (status == ShiftStatus.APPROVED && isToday(shift.date)) {
+        if (shift.date == LocalDate.now()) {
             updateAttendanceWithNext(shift.period, shift.user, shift.room, status)
         }
 
         shiftRepository.save(shift)
     }
-
-    private fun isToday(date: LocalDate) = (date == LocalDate.now())
 
     private fun updateAttendanceWithNext(period: Int, user: UserEntity, room: Room, status: ShiftStatus) {
         val today = LocalDate.now()
