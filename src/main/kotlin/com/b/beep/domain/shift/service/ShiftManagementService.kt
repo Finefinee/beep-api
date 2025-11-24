@@ -1,12 +1,14 @@
 package com.b.beep.domain.shift.service
 
 import com.b.beep.domain.attendance.domain.enums.AttendanceType
+import com.b.beep.domain.attendance.domain.enums.Room
 import com.b.beep.domain.attendance.domain.error.AttendanceError
 import com.b.beep.domain.attendance.repository.AttendanceRepository
 import com.b.beep.domain.shift.entity.ShiftEntity
 import com.b.beep.domain.shift.repository.ShiftRepository
 import com.b.beep.domain.shift.domain.enums.ShiftStatus
 import com.b.beep.domain.shift.domain.error.ShiftError
+import com.b.beep.domain.user.entity.UserEntity
 import com.b.beep.global.exception.CustomException
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
@@ -30,17 +32,40 @@ class ShiftManagementService(
 
         shift.status = status
 
-        if (status == ShiftStatus.APPROVED && shift.date == LocalDate.now()) {
-            val attendance = attendanceRepository
-                .findByPeriodAndUserAndDate(shift.period, shift.user, LocalDate.now())
-                ?: throw CustomException(AttendanceError.ATTENDANCE_NOT_FOUND)
-
-            attendance.type = AttendanceType.SHIFT_ATTEND
-            attendance.room = shift.room
-
-            attendanceRepository.save(attendance)
+        if (status == ShiftStatus.APPROVED && isToday(shift.date)) {
+            updateAttendanceWithNext(shift.period, shift.user, shift.room, status)
         }
 
         shiftRepository.save(shift)
+    }
+
+    private fun isToday(date: LocalDate) = (date == LocalDate.now())
+
+    private fun updateAttendanceWithNext(period: Int, user: UserEntity, room: Room, status: ShiftStatus) {
+        val today = LocalDate.now()
+        updateAttendanceForShift(period, user, room, today, status)
+        updateAttendanceForShift(period + 1, user, room, today, status)
+    }
+
+    private fun updateAttendanceForShift(
+        period: Int,
+        user: UserEntity,
+        room: Room,
+        date: LocalDate,
+        status: ShiftStatus
+    ) {
+        val attendance = attendanceRepository
+            .findByPeriodAndUserAndDate(period, user, date)
+            ?: throw CustomException(AttendanceError.ATTENDANCE_NOT_FOUND)
+
+        when (status) {
+            ShiftStatus.APPROVED -> attendance.type = AttendanceType.SHIFT_ATTEND
+            ShiftStatus.WAITING -> attendance.type = AttendanceType.NOT_ATTEND
+            ShiftStatus.REJECTED -> attendance.type = AttendanceType.NOT_ATTEND
+        }
+
+        attendance.room = room
+
+        attendanceRepository.save(attendance)
     }
 }
