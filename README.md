@@ -18,3 +18,10 @@
 ## pr 규칙
 
 ### pr 타이틀: merge :: 브랜치 이름
+
+##################
+
+## 브랜치 전략
+
+Github-Flow
+<img width="2092" height="1092" alt="image" src="https://github.com/user-attachments/assets/18a674aa-11bd-4f88-bf2e-7a7213e3b9c5" />
