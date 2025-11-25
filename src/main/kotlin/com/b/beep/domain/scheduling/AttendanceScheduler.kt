@@ -16,6 +16,7 @@ import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
 import java.time.LocalDate
+import java.time.LocalDateTime
 
 @Component
 class AttendanceScheduler(
@@ -27,7 +28,32 @@ class AttendanceScheduler(
 ) {
     private val logger = LoggerFactory.getLogger(javaClass)
 
-    // 로깅디비랑 백업디비 만들기, 서버 레포 옮기기
+    // 로깅디비랑 백업디비 만들기
+
+    /*
+    * 현재 유저의 출석 상태 업데이트
+    * */
+    @Scheduled(cron = "1 10 19 * * MON-THU")
+    @Scheduled(cron = "1 40 20 * * MON-THU")
+    @Transactional
+    fun updateCurrentStatus() {
+        val today = LocalDate.now()
+        val currentPeriod = PeriodResolver.getCurrentPeriod()
+
+        val students = userRepository.findAllByRole(UserRole.STUDENT)
+
+        students.forEach { student ->
+            val currentAttendance = attendanceRepository
+                .findByPeriodAndUserAndDate(currentPeriod, student, today)
+
+            currentAttendance?.let { attendance ->
+                    // 사용자의 현재 상태 업데이트
+                    student.currentStatus = attendance.type
+            }
+        }
+
+        userRepository.saveAll(students)
+    }
 
     /*
     * 실이동 수락하기
@@ -57,6 +83,12 @@ class AttendanceScheduler(
         val today = LocalDate.now()
         val periods = listOf(8, 9, 10, 11)
         val students = userRepository.findAllByRole(UserRole.STUDENT)
+
+        // 모든 학생의 currentStatus를 NOT_ATTEND로 초기화
+        students.forEach { student ->
+            student.currentStatus = AttendanceType.NOT_ATTEND
+        }
+        userRepository.saveAll(students)
 
         val records = students.flatMap { student ->
             periods.map { period ->
