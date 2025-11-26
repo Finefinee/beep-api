@@ -5,12 +5,7 @@ import com.b.beep.domain.attendance.domain.enums.Room
 import jakarta.persistence.*
 
 @Entity
-@Table(
-    name = "fixed_rooms",
-    uniqueConstraints = [
-        UniqueConstraint(columnNames = ["user_id", "type"])
-    ]
-)
+@Table(name = "fixed_rooms")
 class FixedRoomEntity(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,

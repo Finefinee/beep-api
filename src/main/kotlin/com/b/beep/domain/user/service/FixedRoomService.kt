@@ -22,8 +22,6 @@ class FixedRoomService(
 
         if (fixedRoomRepository.existsByUserAndRoom(user, request.room))
             throw CustomException(FixedRoomError.ALREADY_EXIST_ROOM)
-        if (fixedRoomRepository.existsByUserAndType(user, request.type))
-            throw CustomException(FixedRoomError.ALREADY_EXIST_TYPE)
 
         val fixedRoom = FixedRoomEntity(
             user = user,
@@ -48,11 +46,7 @@ class FixedRoomService(
             fixedRoom.room = newRoom
         }
 
-        // 타입 중복 검사
         request.type?.let { newType ->
-            val conflict = fixedRoomRepository.findAllByUser(user)
-                .any { it.type == newType && it.id != fixedRoomId }
-            if (conflict) throw CustomException(FixedRoomError.ALREADY_EXIST_TYPE)
             fixedRoom.type = newType
         }
 
