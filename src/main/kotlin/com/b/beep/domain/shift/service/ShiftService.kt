@@ -70,7 +70,7 @@ class ShiftService(
     @Transactional(readOnly = true)
     fun getMyShifts(): List<ShiftEntity> {
         val user = contextHolder.user
-        return shiftRepository.findAllByUser(user)
+        return shiftRepository.findAllByUserAndDate(user, LocalDate.now())
     }
 
     private fun isShiftTimeValid(date: LocalDate?, period: Int?): Boolean {
