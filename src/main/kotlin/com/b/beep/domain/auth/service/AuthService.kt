@@ -41,11 +41,8 @@ class AuthService(
         if (savedToken != refreshToken) {
             throw CustomException(JwtError.INVALID_REFRESH_TOKEN)
         }
-        refreshTokenRepository.delete(email)
 
         val newTokens = jwtProvider.generateToken(email)
-
-        refreshTokenRepository.save(email, newTokens.refreshToken)
 
         return newTokens
     }
