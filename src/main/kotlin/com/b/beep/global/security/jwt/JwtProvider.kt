@@ -51,7 +51,7 @@ class JwtProvider(
             .setExpiration(Date(now.time + jwtProperties.refreshExp))
             .signWith(getSigningKey())
             .compact()
-        refreshTokenRepository.save(email,refreshToken)
+        refreshTokenRepository.save(email, refreshToken)
 
         return refreshToken
     }
