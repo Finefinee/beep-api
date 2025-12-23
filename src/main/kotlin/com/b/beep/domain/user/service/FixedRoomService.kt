@@ -1,12 +1,12 @@
 package com.b.beep.domain.user.service
 
-import com.b.beep.global.security.ContextHolder
 import com.b.beep.domain.user.controller.dto.request.AddFixedRoomRequest
 import com.b.beep.domain.user.controller.dto.request.UpdateFixedRoomRequest
+import com.b.beep.domain.user.domain.FixedRoomError
 import com.b.beep.domain.user.entity.FixedRoomEntity
 import com.b.beep.domain.user.repository.FixedRoomRepository
 import com.b.beep.global.exception.CustomException
-import com.b.beep.domain.user.domain.FixedRoomError
+import com.b.beep.global.security.ContextHolder
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional

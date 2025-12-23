@@ -1,11 +1,8 @@
 package com.b.beep.domain.student.controller.dto.response
 
-import com.b.beep.domain.user.controller.dto.response.FixedRoomResponse
 import com.b.beep.domain.attendance.domain.enums.AttendanceType
-import com.b.beep.domain.user.entity.UserEntity
-import com.b.beep.domain.user.entity.StudentInfoEntity
-import com.b.beep.domain.user.entity.FixedRoomEntity
-import com.b.beep.domain.attendance.entity.AttendanceEntity
+import com.b.beep.domain.student.controller.dto.StudentQueryDto
+import com.b.beep.domain.user.controller.dto.response.FixedRoomResponse
 
 data class StudentResponse(
     val username: String,
@@ -15,17 +12,47 @@ data class StudentResponse(
 ) {
     companion object {
         fun of(
-            user: UserEntity,
-            studentInfo: StudentInfoEntity,
-            fixedRooms: List<FixedRoomEntity>?,
-            attendances: List<AttendanceEntity>
+            studentQueryDto: StudentQueryDto
         ): StudentResponse {
             return StudentResponse(
-                username = user.username,
-                studentId = String.format("%d%d%02d", studentInfo.grade, studentInfo.cls, studentInfo.num),
-                fixedRooms = fixedRooms?.map { FixedRoomResponse.of(it) },
-                statuses = attendances.map { StatusResponse(it.period, it.type) }
+                username = studentQueryDto.user.username,
+                studentId = String.format("%d%d%02d", studentQueryDto.studentInfo.grade, studentQueryDto.studentInfo.cls, studentQueryDto.studentInfo.num),
+                fixedRooms = studentQueryDto.fixedRooms.orEmpty().mapNotNull { room ->
+                    room?.let { FixedRoomResponse.of(it) }
+                },
+                statuses = studentQueryDto.attendances.orEmpty().map { attendance ->
+                    attendance.let { StatusResponse(it.period, it.type) }
+                }
             )
+        }
+
+        private fun ofFixedRoomNull(
+            studentQueryDto: StudentQueryDto
+        ): StudentResponse {
+            return StudentResponse(
+                username = studentQueryDto.user.username,
+                studentId = String.format("%d%d%02d", studentQueryDto.studentInfo.grade, studentQueryDto.studentInfo.cls, studentQueryDto.studentInfo.num),
+                fixedRooms = null,
+                statuses = studentQueryDto.attendances.orEmpty().map { attendance ->
+                    attendance.let { StatusResponse(it.period, it.type) }
+                }
+            )
+        }
+
+        fun ofStudentQueryDtoList(
+            studentQueryDtos: List<StudentQueryDto>
+        ): List<StudentResponse> {
+            return studentQueryDtos.map { dto ->
+                of(dto)
+            }
+        }
+
+        fun ofStudentQueryDtoListFixedRoomsNull(
+            studentQueryDtos: List<StudentQueryDto>
+        ): List<StudentResponse> {
+            return studentQueryDtos.map { dto ->
+                ofFixedRoomNull(dto)
+            }
         }
     }
 }

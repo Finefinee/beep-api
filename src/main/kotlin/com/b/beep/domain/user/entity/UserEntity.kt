@@ -1,8 +1,8 @@
 package com.b.beep.domain.user.entity
 
-import com.b.beep.global.common.entity.BaseEntity
 import com.b.beep.domain.attendance.domain.enums.AttendanceType
 import com.b.beep.domain.user.domain.UserRole
+import com.b.beep.global.common.entity.BaseEntity
 import jakarta.persistence.*
 
 @Entity

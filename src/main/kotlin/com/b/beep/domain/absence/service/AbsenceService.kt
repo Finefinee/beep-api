@@ -1,14 +1,14 @@
 package com.b.beep.domain.absence.service
 
-import com.b.beep.domain.absence.entity.AbsenceEntity
-import com.b.beep.domain.absence.error.AbsenceError
 import com.b.beep.domain.absence.controller.dto.request.CreateAbsenceRequest
 import com.b.beep.domain.absence.controller.dto.request.UpdateAbsenceRequest
+import com.b.beep.domain.absence.entity.AbsenceEntity
+import com.b.beep.domain.absence.error.AbsenceError
 import com.b.beep.domain.absence.repository.AbsenceRepository
-import com.b.beep.domain.user.repository.StudentInfoRepository
-import com.b.beep.global.exception.CustomException
 import com.b.beep.domain.user.domain.UserError
 import com.b.beep.domain.user.entity.UserEntity
+import com.b.beep.domain.user.repository.StudentInfoRepository
+import com.b.beep.global.exception.CustomException
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional

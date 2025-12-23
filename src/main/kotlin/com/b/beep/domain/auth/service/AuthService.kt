@@ -2,13 +2,13 @@ package com.b.beep.domain.auth.service
 
 import com.b.beep.domain.auth.controller.dto.request.LoginRequest
 import com.b.beep.domain.auth.repository.RefreshTokenRepository
-import com.b.beep.domain.user.service.StudentInfoService
 import com.b.beep.domain.user.domain.UserRole
+import com.b.beep.domain.user.service.StudentInfoService
+import com.b.beep.global.exception.CustomException
 import com.b.beep.global.security.jwt.JwtExtractor
 import com.b.beep.global.security.jwt.JwtProvider
 import com.b.beep.global.security.jwt.dto.response.TokenResponse
 import com.b.beep.global.security.jwt.error.JwtError
-import com.b.beep.global.exception.CustomException
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 

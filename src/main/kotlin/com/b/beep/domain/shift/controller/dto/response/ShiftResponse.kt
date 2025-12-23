@@ -1,8 +1,8 @@
 package com.b.beep.domain.shift.controller.dto.response
 
 import com.b.beep.domain.attendance.domain.enums.Room
-import com.b.beep.domain.shift.entity.ShiftEntity
 import com.b.beep.domain.shift.domain.enums.ShiftStatus
+import com.b.beep.domain.shift.entity.ShiftEntity
 import com.b.beep.domain.user.controller.dto.response.UserResponse
 import com.b.beep.domain.user.entity.StudentInfoEntity
 import java.time.LocalDate

@@ -1,8 +1,8 @@
 package com.b.beep.domain.approval.entity
 
+import com.b.beep.domain.attendance.domain.enums.Room
 import com.b.beep.domain.user.entity.UserEntity
 import com.b.beep.global.common.entity.BaseEntity
-import com.b.beep.domain.attendance.domain.enums.Room
 import jakarta.persistence.*
 import java.time.LocalDate
 
