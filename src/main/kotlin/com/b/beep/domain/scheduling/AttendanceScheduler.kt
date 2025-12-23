@@ -146,31 +146,31 @@ class AttendanceScheduler(
         }
     }
 
-    // 출석 시간 알림 전송
-    @Scheduled(cron = "0 25 16 * * MON-THU")  // 8교시 4:25 ~ 4:40
-    @Scheduled(cron = "0 10 19 * * MON-THU")  // 10교시 7:10 ~ 7:30
-    @Scheduled(cron = "0 40 20 * * MON-THU")  // 최종 출석 8:40 ~ 8:55
-    fun sendAttendanceNotificationToAll() {
-        logger.info("출석 알림 전송 시작 - 전체 학생")
-        notificationService.sendToAll(
-            title = "출석 시간입니다! 출석하세요",
-            body = "지금부터 20분 간 출석이 가능합니다.",
-            imageUrl = "https://www.gstatic.com/mobilesdk/240501_mobilesdk/firebase_28dp.png"
-        )
-        logger.info("출석 알림 전송 완료 - 전체 학생")
-    }
-
-    // 미출석자 알림 전송
-    @Scheduled(cron = "0 35 16 * * MON-THU")  // 8교시 4:25 ~ 4:40
-    @Scheduled(cron = "0 25 19 * * MON-THU")  // 10교시 7:10 ~ 7:30
-    @Scheduled(cron = "0 55 20 * * MON-THU")  // 최종 출석 8:40 ~ 8:59
-    fun sendAttendanceReminderToNotAttended() {
-        logger.info("미출석자 알림 전송 시작")
-        notificationService.sendToNotAttended(
-            title = "아직 출석하지 않았습니다!",
-            body = "출석 시간이 5분 후 종료됩니다. 지금 출석해주세요.",
-            imageUrl = "https://www.gstatic.com/mobilesdk/240501_mobilesdk/firebase_28dp.png"
-        )
-        logger.info("미출석자 알림 전송 완료")
-    }
+//    // 출석 시간 알림 전송
+//    @Scheduled(cron = "0 25 16 * * MON-THU")  // 8교시 4:25 ~ 4:40
+//    @Scheduled(cron = "0 10 19 * * MON-THU")  // 10교시 7:10 ~ 7:30
+//    @Scheduled(cron = "0 40 20 * * MON-THU")  // 최종 출석 8:40 ~ 8:55
+//    fun sendAttendanceNotificationToAll() {
+//        logger.info("출석 알림 전송 시작 - 전체 학생")
+//        notificationService.sendToAll(
+//            title = "출석 시간입니다! 출석하세요",
+//            body = "지금부터 20분 간 출석이 가능합니다.",
+//            imageUrl = "https://www.gstatic.com/mobilesdk/240501_mobilesdk/firebase_28dp.png"
+//        )
+//        logger.info("출석 알림 전송 완료 - 전체 학생")
+//    }
+//
+//    // 미출석자 알림 전송
+//    @Scheduled(cron = "0 35 16 * * MON-THU")  // 8교시 4:25 ~ 4:40
+//    @Scheduled(cron = "0 25 19 * * MON-THU")  // 10교시 7:10 ~ 7:30
+//    @Scheduled(cron = "0 55 20 * * MON-THU")  // 최종 출석 8:40 ~ 8:59
+//    fun sendAttendanceReminderToNotAttended() {
+//        logger.info("미출석자 알림 전송 시작")
+//        notificationService.sendToNotAttended(
+//            title = "아직 출석하지 않았습니다!",
+//            body = "출석 시간이 5분 후 종료됩니다. 지금 출석해주세요.",
+//            imageUrl = "https://www.gstatic.com/mobilesdk/240501_mobilesdk/firebase_28dp.png"
+//        )
+//        logger.info("미출석자 알림 전송 완료")
+//    }
 }
