@@ -1,9 +1,9 @@
 package com.b.beep.global.security.jwt
 
+import com.b.beep.domain.auth.repository.RefreshTokenRepository
 import com.b.beep.global.security.jwt.config.JwtProperties
 import com.b.beep.global.security.jwt.dto.response.TokenResponse
 import com.b.beep.global.security.jwt.enums.JwtType
-import com.b.beep.domain.auth.repository.RefreshTokenRepository
 import io.jsonwebtoken.Header
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.io.Decoders

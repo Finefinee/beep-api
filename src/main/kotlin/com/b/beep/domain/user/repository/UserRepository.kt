@@ -1,8 +1,8 @@
 package com.b.beep.domain.user.repository
 
-import com.b.beep.domain.user.entity.UserEntity
 import com.b.beep.domain.attendance.domain.enums.AttendanceType
 import com.b.beep.domain.user.domain.UserRole
+import com.b.beep.domain.user.entity.UserEntity
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Modifying
 import org.springframework.data.jpa.repository.Query

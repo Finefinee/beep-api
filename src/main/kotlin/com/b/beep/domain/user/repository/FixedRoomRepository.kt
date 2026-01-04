@@ -1,9 +1,9 @@
 package com.b.beep.domain.user.repository
 
-import com.b.beep.domain.user.entity.FixedRoomEntity
-import com.b.beep.domain.user.entity.UserEntity
 import com.b.beep.domain.attendance.domain.enums.AttendanceType
 import com.b.beep.domain.attendance.domain.enums.Room
+import com.b.beep.domain.user.entity.FixedRoomEntity
+import com.b.beep.domain.user.entity.UserEntity
 import org.springframework.data.jpa.repository.JpaRepository
 
 interface FixedRoomRepository : JpaRepository<FixedRoomEntity, Long> {

@@ -1,12 +1,12 @@
 package com.b.beep.domain.student.service
 
+import com.b.beep.domain.attendance.domain.PeriodResolver
+import com.b.beep.domain.attendance.domain.enums.AttendanceType
 import com.b.beep.domain.attendance.entity.AttendanceEntity
 import com.b.beep.domain.attendance.repository.AttendanceRepository
+import com.b.beep.domain.user.domain.UserError
 import com.b.beep.domain.user.repository.StudentInfoRepository
 import com.b.beep.domain.user.repository.UserRepository
-import com.b.beep.domain.attendance.domain.enums.AttendanceType
-import com.b.beep.domain.attendance.domain.PeriodResolver
-import com.b.beep.domain.user.domain.UserError
 import com.b.beep.global.exception.CustomException
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional

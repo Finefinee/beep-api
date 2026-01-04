@@ -1,9 +1,9 @@
 package com.b.beep.domain.user.controller.dto.response
 
 import com.b.beep.domain.attendance.domain.enums.AttendanceType
+import com.b.beep.domain.user.domain.UserRole
 import com.b.beep.domain.user.entity.StudentInfoEntity
 import com.b.beep.domain.user.entity.UserEntity
-import com.b.beep.domain.user.domain.UserRole
 
 data class UserResponse(
     val id: Long? = null,

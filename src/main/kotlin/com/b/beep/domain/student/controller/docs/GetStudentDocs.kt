@@ -1,8 +1,8 @@
 package com.b.beep.domain.student.controller.docs
 
-import com.b.beep.domain.student.controller.dto.response.StudentResponse
 import com.b.beep.domain.attendance.domain.enums.AttendanceType
 import com.b.beep.domain.attendance.domain.enums.Room
+import com.b.beep.domain.student.controller.dto.response.StudentResponse
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.tags.Tag
 
